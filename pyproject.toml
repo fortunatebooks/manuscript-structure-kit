@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "manuscript-structure-kit"
+version = "0.1.0"
+description = "Python utilities for detecting and normalizing long-form manuscript structure."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+  { name = "Manuscript Structure Kit contributors" }
+]
+keywords = ["manuscript", "markdown", "epub", "docx", "publishing", "fiction", "nlp"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Text Processing",
+  "Topic :: Text Processing :: Markup :: Markdown",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6.0",
+  "mypy>=1.10",
+]
+
+[project.scripts]
+manuscript-kit = "manuscript_kit.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/fortunatebooks/manuscript-structure-kit"
+Source = "https://github.com/fortunatebooks/manuscript-structure-kit"
+Issues = "https://github.com/fortunatebooks/manuscript-structure-kit/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/manuscript_kit"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+files = ["src/manuscript_kit"]
