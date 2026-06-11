@@ -63,7 +63,9 @@ def main(argv: list[str] | None = None) -> int:
             return _normalize(Path(args.input), Path(args.out), args.chapter_level)
         if args.command == "sample":
             sample = extract_book_sample(args.input, total_words=args.words)
-            Path(args.out).write_text(sample + "\n", encoding="utf-8")
+            output_path = Path(args.out)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(sample + "\n", encoding="utf-8")
             return 0
         if args.command == "wordcount":
             print(count_words(read_text(args.input)))

@@ -25,6 +25,17 @@ def test_cli_wordcount(tmp_path: Path, capsys) -> None:  # type: ignore[no-untyp
     assert capsys.readouterr().out.strip() == "5"
 
 
+def test_cli_sample_creates_output_parent_directory(tmp_path: Path) -> None:
+    manuscript = tmp_path / "book.md"
+    output = tmp_path / "samples" / "review.txt"
+    manuscript.write_text("One short paragraph.\n\nAnother short paragraph.", encoding="utf-8")
+
+    exit_code = main(["sample", str(manuscript), "--words", "10", "--out", str(output)])
+
+    assert exit_code == 0
+    assert output.read_text(encoding="utf-8") == "One short paragraph.\n\nAnother short paragraph.\n"
+
+
 def test_cli_chapterize_only_rewrites_chapterlike_headings(tmp_path: Path) -> None:
     manuscript = tmp_path / "book.md"
     output = tmp_path / "chapterized.md"
