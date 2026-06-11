@@ -87,22 +87,24 @@ mypy src/manuscript_kit
 
 ## Quick start
 
+This repository includes a tiny public example at `examples/mini_novel.md` for trying the CLI without bringing your own manuscript.
+
 ### Inspect a manuscript
 
 ```bash
-manuscript-kit inspect examples/novel.md
+manuscript-kit inspect examples/mini_novel.md
 ```
 
 Example output:
 
 ```text
-Path: examples/novel.md
-Size: 184231 bytes
-Words: 82411
-Headings: 42
+Path: examples/mini_novel.md
+Size: 325 bytes
+Words: 51
+Headings: 5
 Detected chapter level: 2
 H1: 1
-H2: 40
+H2: 3
 H3: 1
 ```
 
@@ -164,6 +166,8 @@ manuscript-kit wordcount novel.docx
 ## Python API
 
 ```python
+from pathlib import Path
+
 from manuscript_kit import (
     clean_toc_artifacts,
     count_words,
